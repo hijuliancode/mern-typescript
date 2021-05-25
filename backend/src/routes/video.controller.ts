@@ -33,6 +33,8 @@ export const updateVideo:RequestHandler = (req, res) => {
   res.json('updating videos')
 }
 
-export const deleteVideo:RequestHandler = (req, res) => {
-  res.json('deleting video')
+export const deleteVideo:RequestHandler = async (req, res) => {
+  const videoFound = await Video.findByIdAndDelete(req.params.id)
+  if (!videoFound) return res.status(404).json()
+  return res.json('Video deleted')
 }
