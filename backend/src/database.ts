@@ -1,9 +1,15 @@
-import mongoose from 'mongoose'
+import mongoose, { ConnectionOptions } from 'mongoose'
 
 (async () => {
-  await mongoose.connect('mongodb://localhost/mern-database', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  console.log('Database is connected')
+  try {
+    const mongooseOptions:ConnectionOptions = {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    }
+  
+    const db = await mongoose.connect('mongodb://localhost/mern-database', mongooseOptions)
+    console.log('database is connected to: ', db.connection.name)
+  } catch (error) {
+    console.log(error)
+  }
 })()
