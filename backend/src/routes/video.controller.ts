@@ -23,8 +23,10 @@ export const getVideos:RequestHandler = async (req, res) => {
   }
 }
 
-export const getVideo:RequestHandler = (req, res) => {
-  res.json('getting video')
+export const getVideo:RequestHandler = async (req, res) => {
+  const videoFound = await Video.findById(req.params.id);
+  if (!videoFound) return res.status(204).json()
+  return res.json(videoFound)
 }
 
 export const updateVideo:RequestHandler = (req, res) => {
