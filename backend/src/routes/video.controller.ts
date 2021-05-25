@@ -14,8 +14,13 @@ export const createVideo:RequestHandler = async (req, res) => {
   })
 }
 
-export const getVideos:RequestHandler = (req, res) => {
-  res.json('getting videos')
+export const getVideos:RequestHandler = async (req, res) => {
+  try {
+    const videos = await Video.find()
+    return res.json(videos)
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 export const getVideo:RequestHandler = (req, res) => {
