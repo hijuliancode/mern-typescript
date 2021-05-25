@@ -1,3 +1,7 @@
-const greeting:string = "Hello World"
+import express from 'express'
 
-console.log(greeting);
+const app = express()
+
+app.listen(3000, () => {
+  console.log('Hello world from 3000')
+})
